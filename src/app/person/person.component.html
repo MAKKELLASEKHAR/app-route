@@ -1,0 +1,64 @@
+<p>person works!</p>
+<form  [formGroup]="personForm" (ngSubmit)="display()">
+<label for="firstname">Firstname:</label>&nbsp;
+    <input id="firstname" type="text" formControlName="firstname">  
+   <div *ngIf="!firstname?.valid&&(firstname?.dirty||firstname?.touched)">
+    <div [hidden]="!firstname?.errors?.['required']"  style="color: red;" class="alert alert-danger" >
+        Firstname is required</div>
+   </div>
+    <br>
+    <br>
+    <label>Lastname:</label>&nbsp;
+    <input id="lastname" type="text" formControlName="lastname">
+    <div *ngIf="!lastname?.valid&&(lastname?.dirty||lastname?.touched)">
+        <div [hidden]="!lastname?.errors?.['required']" class="alert alert-danger" style="color: red;">
+            Lastname is required..</div>
+       </div>
+       <div *ngIf="!lastname?.valid&&(lastname?.dirty||lastname?.touched)">
+        <div [hidden]="!lastname?.errors?.['minlength']" class="alert alert-danger" style="color: red;">
+            Lastname should be atleast 4 chars..</div>
+       </div>
+  <br>
+    <br>
+  <label> Email:</label>&nbsp;
+    <input id="email" type="email" formControlName="email" >
+    <div *ngIf="!email?.valid&&(email?.dirty||email?.touched)">
+        <div [hidden]="!email?.errors?.['required']" class="alert alert-danger" style="color: red;">
+            Email is required..</div>
+       </div>
+       <div *ngIf="!email?.valid&&(email?.dirty||email?.touched)">
+        <div [hidden]="!email?.errors?.['email']" class="alert alert-danger" style="color: red;">
+            Email is Invalid..</div>
+       </div>
+  <br>
+    <br>
+  <label>Gender :</label>&nbsp;
+    <input id="male" type="radio" formControlName="gender" value="male" [defaultChecked]="true">
+    <label for="male">Male</label>
+    &nbsp;
+    <input id="female" type="radio" formControlName="gender" value="female">
+    <label for="female">Female</label>
+    <div *ngIf="!gender?.valid&&(gender?.dirty||gender?.touched)">
+        <div [hidden]="!gender?.errors?.['required']" style="color: red;">
+            Gender is required..</div>
+       </div>
+  
+  <br>
+    <br>
+  <label>Country:</label>&nbsp;
+  <select name="country" id="country" formControlName="country">
+    <!-- <option [value]="defaultcountry" [defaultSelected]="true" >{{defaultcountry}}</option> -->
+    <option *ngFor="let c of countries" [value]="c">{{c}}</option>
+  </select>
+  <div *ngIf="!country?.valid&&(country?.dirty||country?.touched)">
+    <div [hidden]="!country?.errors?.['required']" class="alert alert-danger" style="color: red;">
+        Country is required..</div>
+   </div>
+ </form>
+  <hr>
+    <button class='btn btn-outline-secondary'
+              style='width:100px'
+              (click)='display()' [disabled]="!personForm.valid">
+        <i class='fa fa-chevron-left'></i> submit
+     </button>
+               >
